@@ -30,12 +30,7 @@ const EmployeeSchema = new mongoose.Schema({
         validate: [validateEmail, 'Please provide a valid email address'],
     
     },
-    username: {
-        type: String,
-        unique: true,
-        sparse: true,
-        trim: true,
-      },
+   
       password: {
         type: String,
         trim: true,
@@ -56,4 +51,4 @@ const EmployeeSchema = new mongoose.Schema({
 })
 
 const Employee  = mongoose.model('col_employee', EmployeeSchema)
-export default Employee
+module.exports = Employee

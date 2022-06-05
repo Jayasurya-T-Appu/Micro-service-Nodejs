@@ -11,7 +11,17 @@ const Joi = require('joi')
     landmark:Joi.string().required()
 })
 
+employeeCreate = Joi.object().keys({
+    name: Joi.string().required(),
+    email:Joi.string().required(),
+    username:Joi.string().required(),
+    password:Joi.string().required(),
+    role:Joi.string().required(),
+    phone:Joi.string().required(),
+})
+
 
 module.exports = {
-    companyCreate
+    companyCreate,
+    employeeCreate
 }

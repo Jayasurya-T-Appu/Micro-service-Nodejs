@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const AppConfig = require('../config/config')
 const CompanyRouter = require('./router/Company.router')
+const Employeerouter = require('./router/Employee.router')
 const TokenHandler = require('./utils/tokenHandler/token')
 class Server {
     expressApp = express()
@@ -9,12 +10,15 @@ class Server {
     router = express.Router()
 
     companyRouter
+    employeeRouter
     appConfigObj
     tokenHandler
     constructor() {
         this.appConfigObj = new AppConfig();
         this.tokenHandler = new TokenHandler()
         this.companyRouter = new CompanyRouter()
+        this.employeeRouter = new Employeerouter()
+        this.employeeRouter.routes()
         this.companyRouter.routes()
         this.config()
         this.routes()
@@ -57,6 +61,7 @@ class Server {
         //Router for Company Service
     
         this.expressApp.use(`/v${appVersion}/company`,this.companyRouter.router)
+        this.expressApp.use(`/v${appVersion}/employee`,this.employeeRouter.router)
     }
 }
 module.exports = new Server().expressApp

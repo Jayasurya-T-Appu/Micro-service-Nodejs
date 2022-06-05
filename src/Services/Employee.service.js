@@ -1,14 +1,14 @@
-const CompanyTask  = require('../task/Company.task')
-class ConpanyService {
+const EmployeeTask = require('../task/Employee.task')
 
-    companyTaskObj = new CompanyTask()
+class EmployeeService {
+    employeeTaskObj = new EmployeeTask()
 
     getAll(req, res){
-        this.companyTaskObj.getAll()
+        this.employeeTaskObj.getAll()
         .then((result) => {
             res.status(200).json({
                 status:'OK',
-                message:"All Companies Fetched",
+                message:"All Employees Fetched",
                 resultData: result
             })
             
@@ -16,16 +16,17 @@ class ConpanyService {
         .catch((err) =>console.log(err))
     }
 
+    
     create(req, res){
-        this.companyTaskObj.create(req.body)
+        this.employeeTaskObj.create(req.body)
         .then((result)=> {
             res.status(201).json({
                 status:'OK',
-                message:'Company registered succesfully',
+                message:'Employee registered succesfully',
                 resultData:result
             })
         })
     }
 }
 
-module.exports = ConpanyService
+module.exports = EmployeeService
