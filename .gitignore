@@ -1,0 +1,11 @@
+# Node artifact files
+node_modules/
+/log
+package-lock.json
+/undefined
+undefined/
+
+
+# Log files
+*.log
+.env
