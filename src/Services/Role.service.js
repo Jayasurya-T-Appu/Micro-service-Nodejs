@@ -1,51 +1,53 @@
-const CompanyTask = require("../task/Company.task");
 const Errorhandler = require("../utils/error-handler/error-handler");
-class ConpanyService {
-  companyTaskObj = new CompanyTask();
+const RoleTask = require("../task/Role.task");
+class RoleService {
+  roleTaskObj = new RoleTask();
   errorHandler = new Errorhandler();
 
   getAll(req, res) {
-    this.companyTaskObj
+    this.roleTaskObj
       .getAll()
       .then((result) => {
         res.status(200).json({
           status: "OK",
-          message: "All Companies Fetched",
+          message: "All roles fetched",
           resultData: result,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.errorHandler.getErrorMessage("Role", res, err);
+      });
   }
 
   create(req, res) {
-    this.companyTaskObj
+    this.roleTaskObj
       .create(req.body)
       .then((result) => {
         res.status(201).json({
           status: "OK",
-          message: "Company registered succesfully",
+          message: " Role created succesfully",
           resultData: result,
         });
       })
       .catch((err) => {
-        this.errorHandler.getErrorMessage("Company", res, err);
+        this.errorHandler.getErrorMessage("Role", res, err);
       });
   }
 
-  update(req, res) {
-    this.companyTaskObj
-      .update(req.params.id, req.body)
+  delete(req, res) {
+    this.roleTaskObj
+      .delete(req.params.id)
       .then((result) => {
         res.status(201).json({
           status: "OK",
-          message: "Company detailes updated succesfully",
+          message: "Role Deleated",
           resultData: result,
         });
       })
       .catch((err) => {
-        this.errorHandler.getErrorMessage("Company", res, err);
+        this.errorHandler.getErrorMessage("Role", res, err);
       });
   }
 }
 
-module.exports = ConpanyService;
+module.exports = RoleService;
